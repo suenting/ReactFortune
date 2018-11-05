@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes, { nominalTypeHack } from 'prop-types';
-import './Animal.css';
+import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
@@ -73,15 +72,21 @@ class Animal extends Component{
         const {classes} = this.props;
         if(error)
         {
-            return <div>Failed to load</div>
+            return(<Card className={classNames(classes.card)} onClick={(event)=>this.doRequestAnimal()}>
+                <center>
+                <Typography>Failed to Load</Typography>
+                </center>
+            </Card>);
         }
         if(!isLoaded)
         {
             return(
-                <div>
-                    <img src="./spinner.gif" alt="animal"></img>
-                </div>
-            )
+            <Card className={classNames(classes.card)}>
+            <center>
+            <img src="./spinner.gif" alt="animal"></img>
+            </center>
+            </Card>                
+            );
         }
         return(
             <Card className={classNames(classes.card)} onClick={(event)=>this.doRequestAnimal()}>
